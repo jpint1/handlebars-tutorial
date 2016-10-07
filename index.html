@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        table{
+            border:1px solid #000;
+        }    
+        table td{
+            border-bottom:1px solid #000;
+        }          
+        table th{
+            background-color:#d8d8d8;
+        }
+    </style>
+</head>
+<body>
+    <script src="js/jquery.js"></script>
+    <script src="js/handlebars.min-latest.js"></script>
+    <script>
+    
+        $(function () {
+          // Grab the template script
+          var theTemplateScript = $("#example-template").html();
+
+          // Compile the template
+          var theTemplate = Handlebars.compile(theTemplateScript);
+
+          // This is the default context, which is passed to the template
+/*          var context = {
+            people: [ 
+              { firstName: 'Homer', lastName: 'Simpson' },
+              { firstName: 'Peter', lastName: 'Griffin' },
+              { firstName: 'Eric', lastName: 'Cartman' },
+              { firstName: 'Kenny', lastName: 'McCormick' },
+              { firstName: 'Bart', lastName: 'Simpson' }
+            ]
+          };*/
+            
+            var context = 
+            {
+                "transId": "W-Sep_28_23_51_09_731-GRetVIrw-app2"
+                , "status": "SUCCESS"
+                , "ghaMember": false
+                , "listOfRatePlan": [{
+                    "code": "IDDRPCO2"
+                    , "name": "Refreshing Pacific Club Offer"
+                    , "rateInclusion": ["10% off Best Available Rate", "Minimum 2 night stay", "Full Pacific Club privileges", "Daily buffet      breakfast in the Pacific Club Lounge", "Pre-dinner drinks and canap&#233;s", "All day tea, coffee and light refreshments", "Inclusive of Wi-Fi", "Inclusive of GST"]
+                    , "termsSummary": ["Fully Flexible Rate", "No deposit required", "Cancellations made after 4pm on day of arrival will incur one nights      penalty fee"]
+                    , "shortDesc": "Stay 2 Nights and Save"
+                    , "suppressRate": false
+                    , "listOfAdditionalInfo": [{
+                        "type": "POLICY_GUARANTEE"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_CANCEL"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_DEPOSIT"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "INFO_MARKETING"
+                        , "additionalDescs": ""
+                    }]
+                    , "listOfRoomRate": [{
+                        "roomTypeCode": "PK"
+                        , "rate": 277
+                    }, {
+                        "roomTypeCode": "SS3"
+                        , "rate": 286
+                    }, {
+                        "roomTypeCode": "PBK"
+                        , "rate": 295
+                    }, {
+                        "roomTypeCode": "SS4"
+                        , "rate": 304
+                    }, {
+                        "roomTypeCode": "SS2"
+                        , "rate": 340
+                    }, {
+                        "roomTypeCode": "SS1"
+                        , "rate": 1555
+                    }]
+                    , "taxInclusive": true
+                    , "memberRate": false
+                }, {
+                    "code": "IDDRNDAR"
+                    , "name": "Best Available Rate"
+                    , "rateInclusion": ["Overnight Accommodation", "10% GST"]
+                    , "termsSummary": ["Fully Flexible", "Cancellations received after 4pm on arrival day will incur one night      penalty fee", "No deposit required", "Credit card for guarantee"]
+                    , "shortDesc": "Enjoy greater flexibility for your stay"
+                    , "suppressRate": false
+                    , "listOfAdditionalInfo": [{
+                        "type": "POLICY_GUARANTEE"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_CANCEL"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_DEPOSIT"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "INFO_MARKETING"
+                        , "additionalDescs": ""
+                    }]
+                    , "listOfRoomRate": [{
+                        "roomTypeCode": "DK"
+                        , "rate": 227.5
+                    }, {
+                        "roomTypeCode": "DT"
+                        , "rate": 237.5
+                    }, {
+                        "roomTypeCode": "BK"
+                        , "rate": 277.5
+                    }, {
+                        "roomTypeCode": "BQQ"
+                        , "rate": 287.5
+                    }, {
+                        "roomTypeCode": "EK"
+                        , "rate": 297.5
+                    }, {
+                        "roomTypeCode": "PK"
+                        , "rate": 307.5
+                    }, {
+                        "roomTypeCode": "SS3"
+                        , "rate": 317.5
+                    }, {
+                        "roomTypeCode": "PBK"
+                        , "rate": 327.5
+                    }, {
+                        "roomTypeCode": "SS4"
+                        , "rate": 337.5
+                    }, {
+                        "roomTypeCode": "SS2"
+                        , "rate": 377.5
+                    }, {
+                        "roomTypeCode": "SS1"
+                        , "rate": 1727.5
+                    }]
+                    , "taxInclusive": true
+                    , "memberRate": false
+                }, {
+                    "code": "IDDRNPCF"
+                    , "name": "Pacific Club Best Available rate"
+                    , "rateInclusion": ["Overnight Accommodation", "Full Pacific Club privileges", "Daily buffet      breakfast in the Pacific Club Lounge", "Pre-dinner drinks and canap&#233;s", "All day tea, coffee and light refreshments", "Complimentary Wi-Fi in Club      Lounge", "10% GST"]
+                    , "termsSummary": ["Fully Flexible", "Cancellations received after 4pm on arrival day will incur one night        penalty fee", "No deposit required", "Credit card for guarantee"]
+                    , "shortDesc": "Enjoy exclusive privileges in our Club Lounge"
+                    , "suppressRate": false
+                    , "listOfAdditionalInfo": [{
+                        "type": "POLICY_GUARANTEE"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_CANCEL"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_DEPOSIT"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "INFO_MARKETING"
+                        , "additionalDescs": ""
+                    }]
+                    , "listOfRoomRate": [{
+                        "roomTypeCode": "PK"
+                        , "rate": 307.5
+                    }, {
+                        "roomTypeCode": "SS3"
+                        , "rate": 317.5
+                    }, {
+                        "roomTypeCode": "PBK"
+                        , "rate": 327.5
+                    }, {
+                        "roomTypeCode": "SS4"
+                        , "rate": 337.5
+                    }, {
+                        "roomTypeCode": "SS2"
+                        , "rate": 377.5
+                    }, {
+                        "roomTypeCode": "SS1"
+                        , "rate": 1727.5
+                    }]
+                    , "taxInclusive": true
+                    , "memberRate": false
+                }, {
+                    "code": "IPPKGGBR"
+                    , "name": "Bed and Breakfast"
+                    , "rateInclusion": ["Overnight Accommodation", "Daily buffet        breakfast for two", "Inclusive of Wi-Fi", "Inclusive of GST"]
+                    , "termsSummary": ["Fully Flexible Rate", "Cancellations received after 4pm on day of        arrival will incur one nights penalty fee", "Credit Card required as        guarantee"]
+                    , "shortDesc": "Begin your day with a hearty meal!"
+                    , "suppressRate": false
+                    , "listOfAdditionalInfo": [{
+                        "type": "POLICY_GUARANTEE"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_CANCEL"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_DEPOSIT"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "INFO_MARKETING"
+                        , "additionalDescs": ""
+                    }]
+                    , "listOfRoomRate": [{
+                        "roomTypeCode": "DK"
+                        , "rate": 246.5
+                    }, {
+                        "roomTypeCode": "DT"
+                        , "rate": 256.5
+                    }, {
+                        "roomTypeCode": "BK"
+                        , "rate": 296.5
+                    }, {
+                        "roomTypeCode": "BQQ"
+                        , "rate": 306.5
+                    }, {
+                        "roomTypeCode": "EK"
+                        , "rate": 316.5
+                    }]
+                    , "taxInclusive": true
+                    , "memberRate": false
+                }, {
+                    "code": "IDDRRGHA"
+                    , "name": "Stay 2 Nights and Save 20%"
+                    , "rateInclusion": ["Minimum 2 night stay", "Inclusive of      WIFI", "Inclusive of GST"]
+                    , "termsSummary": ["Fully Flexible Rate", "Cancellable up      to 4pm on day of arrival", "Credit card guarantee required"]
+                    , "suppressRate": false
+                    , "listOfAdditionalInfo": [{
+                        "type": "POLICY_GUARANTEE"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_CANCEL"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_DEPOSIT"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "INFO_MARKETING"
+                        , "additionalDescs": ""
+                    }]
+                    , "listOfRoomRate": [{
+                        "roomTypeCode": "DK"
+                        , "rate": 182
+                    }, {
+                        "roomTypeCode": "DT"
+                        , "rate": 190
+                    }, {
+                        "roomTypeCode": "BK"
+                        , "rate": 222
+                    }, {
+                        "roomTypeCode": "BQQ"
+                        , "rate": 230
+                    }, {
+                        "roomTypeCode": "EK"
+                        , "rate": 238
+                    }]
+                    , "taxInclusive": true
+                    , "memberRate": false
+                }, {
+                    "code": "IPPKGDBB"
+                    , "name": "Evening out in Perth"
+                    , "rateInclusion": ["Overnight accommodation", "Complimentary WIFI", "Your choice of one 2-Course set menu or buffet dinner for two Adults in      Montereys per stay", "Daily Breakfast for Two adults in Montereys", "Complimentary Self-parking for one vehicle", "Inclusive of GST"]
+                    , "termsSummary": ["Self-parking is subject to availability", "Fully Flexible Rate", "Cancellations received after 4pm on day of arrival will incur one night      penalty fee", "No deposit required", "Credit card required as guarantee"]
+                    , "shortDesc": "Indulge in a delicious dinner for two"
+                    , "suppressRate": false
+                    , "listOfAdditionalInfo": [{
+                        "type": "POLICY_GUARANTEE"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_CANCEL"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_DEPOSIT"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "INFO_MARKETING"
+                        , "additionalDescs": ""
+                    }]
+                    , "listOfRoomRate": [{
+                        "roomTypeCode": "DK"
+                        , "rate": 266.5
+                    }, {
+                        "roomTypeCode": "DT"
+                        , "rate": 276.5
+                    }, {
+                        "roomTypeCode": "BK"
+                        , "rate": 316.5
+                    }, {
+                        "roomTypeCode": "BQQ"
+                        , "rate": 326.5
+                    }, {
+                        "roomTypeCode": "EK"
+                        , "rate": 336.5
+                    }, {
+                        "roomTypeCode": "PK"
+                        , "rate": 346.5
+                    }, {
+                        "roomTypeCode": "SS3"
+                        , "rate": 356.5
+                    }, {
+                        "roomTypeCode": "PBK"
+                        , "rate": 366.5
+                    }, {
+                        "roomTypeCode": "SS4"
+                        , "rate": 376.5
+                    }, {
+                        "roomTypeCode": "SS2"
+                        , "rate": 416.5
+                    }, {
+                        "roomTypeCode": "SS1"
+                        , "rate": 1766.5
+                    }]
+                    , "taxInclusive": true
+                    , "memberRate": false
+                }, {
+                    "code": "IPPKGPRK"
+                    , "name": "Drive and Stay"
+                    , "rateInclusion": ["Overnight Accommodation", "Complimentary WIFI", "Complimentary self-parking for one vehicle", "Inclusive of GST", "Package does not include valet parking services and may result in extra        charges if used", "Fully Flexible Rate", "Cancellations received after 4pm on day of arrival will incur one night        penalty fee", "No deposit required", "Credit card required as guarantee"]
+                    , "shortDesc": "Enjoy added convenience with our drive and stay package"
+                    , "suppressRate": false
+                    , "listOfAdditionalInfo": [{
+                        "type": "POLICY_GUARANTEE"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_CANCEL"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_DEPOSIT"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "INFO_MARKETING"
+                        , "additionalDescs": ""
+                    }]
+                    , "listOfRoomRate": [{
+                        "roomTypeCode": "DK"
+                        , "rate": 242.5
+                    }, {
+                        "roomTypeCode": "DT"
+                        , "rate": 252.5
+                    }, {
+                        "roomTypeCode": "BK"
+                        , "rate": 292.5
+                    }, {
+                        "roomTypeCode": "BQQ"
+                        , "rate": 302.5
+                    }, {
+                        "roomTypeCode": "EK"
+                        , "rate": 312.5
+                    }]
+                    , "taxInclusive": true
+                    , "memberRate": false
+                }, {
+                    "code": "IDDRRMBB"
+                    , "name": "Members Best Available Rate"
+                    , "rateInclusion": ["Overnight Accommodation", "Inclusive of        10% GST tax"]
+                    , "termsSummary": ["Fully Flexible", "Cancellations received after 4pm        on arrival day will incur one night penalty fee", "No deposit required", "Credit card for guarantee"]
+                    , "shortDesc": "Enjoy greater flexibility for your stay"
+                    , "suppressRate": false
+                    , "listOfAdditionalInfo": [{
+                        "type": "POLICY_GUARANTEE"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_CANCEL"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_DEPOSIT"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "INFO_MARKETING"
+                        , "additionalDescs": ""
+                    }]
+                    , "listOfRoomRate": [{
+                        "roomTypeCode": "DK"
+                        , "rate": 193.5
+                    }, {
+                        "roomTypeCode": "DT"
+                        , "rate": 202.5
+                    }, {
+                        "roomTypeCode": "BK"
+                        , "rate": 236.5
+                    }, {
+                        "roomTypeCode": "BQQ"
+                        , "rate": 244.5
+                    }, {
+                        "roomTypeCode": "EK"
+                        , "rate": 253.5
+                    }, {
+                        "roomTypeCode": "PK"
+                        , "rate": 261.5
+                    }, {
+                        "roomTypeCode": "SS3"
+                        , "rate": 270.5
+                    }, {
+                        "roomTypeCode": "PBK"
+                        , "rate": 278.5
+                    }, {
+                        "roomTypeCode": "SS4"
+                        , "rate": 287.5
+                    }, {
+                        "roomTypeCode": "SS2"
+                        , "rate": 321.5
+                    }, {
+                        "roomTypeCode": "SS1"
+                        , "rate": 1468.5
+                    }]
+                    , "taxInclusive": true
+                    , "memberRate": true
+                }, {
+                    "code": "IPPKGMBA"
+                    , "name": "Members Bed and Breakfast"
+                    , "rateInclusion": ["Daily buffet breakfast for two"]
+                    , "shortDesc": "Begin your day with a hearty meal!"
+                    , "suppressRate": false
+                    , "listOfAdditionalInfo": [{
+                        "type": "POLICY_GUARANTEE"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_CANCEL"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_DEPOSIT"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "INFO_MARKETING"
+                        , "additionalDescs": ""
+                    }]
+                    , "listOfRoomRate": [{
+                        "roomTypeCode": "DK"
+                        , "rate": 210.48
+                    }, {
+                        "roomTypeCode": "DT"
+                        , "rate": 218.98
+                    }, {
+                        "roomTypeCode": "BK"
+                        , "rate": 252.98
+                    }, {
+                        "roomTypeCode": "BQQ"
+                        , "rate": 261.48
+                    }, {
+                        "roomTypeCode": "EK"
+                        , "rate": 269.98
+                    }]
+                    , "taxInclusive": true
+                    , "memberRate": true
+                }, {
+                    "code": "IDDRRMBH"
+                    , "name": "Members Stay 2 and Save"
+                    , "rateInclusion": ["Overnight Accommodation", "Inclusive of WIFI", "Inclusive of GST"]
+                    , "termsSummary": ["Fully Flexible Rate", "Cancellable up to 4pm on        day of arrival"]
+                    , "shortDesc": "Stay longer and Save"
+                    , "suppressRate": false
+                    , "listOfAdditionalInfo": [{
+                        "type": "POLICY_GUARANTEE"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_CANCEL"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_DEPOSIT"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "INFO_MARKETING"
+                        , "additionalDescs": ""
+                    }]
+                    , "listOfRoomRate": [{
+                        "roomTypeCode": "DK"
+                        , "rate": 164
+                    }, {
+                        "roomTypeCode": "DT"
+                        , "rate": 171
+                    }, {
+                        "roomTypeCode": "BK"
+                        , "rate": 200
+                    }, {
+                        "roomTypeCode": "BQQ"
+                        , "rate": 207
+                    }, {
+                        "roomTypeCode": "EK"
+                        , "rate": 215
+                    }]
+                    , "taxInclusive": true
+                    , "memberRate": true
+                }, {
+                    "code": "IPPKGMBE"
+                    , "name": "Members A Suite Experience"
+                    , "rateInclusion": ["Welcome fruit platter", "Complimentary access to Club Lounge", "Late check-out till 3pm (subject to availability)"]
+                    , "termsSummary": ["Full non-refundable prepayment at the time of booking is required."]
+                    , "shortDesc": "Get extra benefits when booking our Suites"
+                    , "suppressRate": false
+                    , "listOfAdditionalInfo": [{
+                        "type": "POLICY_GUARANTEE"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_CANCEL"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_DEPOSIT"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "INFO_MARKETING"
+                        , "additionalDescs": ""
+                    }]
+                    , "listOfRoomRate": [{
+                        "roomTypeCode": "SS3"
+                        , "rate": 228.6
+                    }, {
+                        "roomTypeCode": "SS4"
+                        , "rate": 243
+                    }, {
+                        "roomTypeCode": "SS2"
+                        , "rate": 271.8
+                    }, {
+                        "roomTypeCode": "SS1"
+                        , "rate": 1243.8
+                    }]
+                    , "taxInclusive": false
+                    , "memberRate": true
+                }, {
+                    "code": "IPPKGMBG"
+                    , "name": "Members' Drive and Stay"
+                    , "rateInclusion": ["Complimentary Self Parking (1 vehicle per day)", "Overnight Accommodation"]
+                    , "termsSummary": ["Package does not include valet parking services and may result in extra        charges if used", "Fully Flexible", "Cancellations received after 4pm on arrival day will incur one night        penalty fee", "No deposit required", "Credit card for guarantee"]
+                    , "suppressRate": false
+                    , "listOfAdditionalInfo": [{
+                        "type": "POLICY_GUARANTEE"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_CANCEL"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "POLICY_DEPOSIT"
+                        , "additionalDescs": ""
+                    }, {
+                        "type": "INFO_MARKETING"
+                        , "additionalDescs": ""
+                    }]
+                    , "listOfRoomRate": [{
+                        "roomTypeCode": "DK"
+                        , "rate": 204.75
+                    }, {
+                        "roomTypeCode": "DT"
+                        , "rate": 213.75
+                    }, {
+                        "roomTypeCode": "BK"
+                        , "rate": 249.75
+                    }, {
+                        "roomTypeCode": "BQQ"
+                        , "rate": 258.75
+                    }, {
+                        "roomTypeCode": "EK"
+                        , "rate": 267.75
+                    }, {
+                        "roomTypeCode": "PK"
+                        , "rate": 276.75
+                    }, {
+                        "roomTypeCode": "SS3"
+                        , "rate": 285.75
+                    }, {
+                        "roomTypeCode": "PBK"
+                        , "rate": 294.75
+                    }, {
+                        "roomTypeCode": "SS4"
+                        , "rate": 303.75
+                    }, {
+                        "roomTypeCode": "SS2"
+                        , "rate": 339.75
+                    }, {
+                        "roomTypeCode": "SS1"
+                        , "rate": 1554.75
+                    }]
+                    , "taxInclusive": true
+                    , "memberRate": true
+                }]
+                , "totalRoomAndAddOnRate": 0
+                , "totalRoomAndAddOnTaxes": 0
+                , "currency": "AUD"
+                , "taxInclusive": false
+            };           
+            
+            
+
+/*
+ 	Handlebars.registerHelper('sort_by_key', function (array, key) {
+
+        Sorts array by a given key
+		 @function sort_by_key
+		 @memberof Handlebars.helpers
+		 @param {array} array - The data to sort.
+		 @param {string} key - The key to sort by.
+		 @see {@link http://stackoverflow.com/questions/8175093/simple-function-to-sort-an-array-of-objects}
+		 @returns {array}
+		
+		return array.sort(function(a, b) {
+			var x = a[key],
+			y = b[key];
+
+			return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+		});
+ 	});
+*/
+
+
+            //The helper.
+        Handlebars.registerHelper('each_sort_warranties', function (array, opts) {
+
+            var key = "coverage_period";
+
+            array.sort(function (a, b) {
+
+                if ( parseInt(a[key]) > parseInt(b[key]) ) {
+                    return 1;
+                }
+                if ( parseInt(a[key]) < parseInt(b[key]) ) {
+                    return -1;
+                }
+                // a must be equal to b
+                return 0;
+            });
+
+            var s = '';
+
+            for (var i = 0; i < array.length; i++) {
+                s += opts.fn(array[i]);
+            }
+
+            return s;
+        });
+
+            
+         Handlebars.registerHelper('is_status', function(msg, matchMsg, options) 
+            {
+                if(msg === matchMsg){
+                    console.log('true');
+                    console.log(matchMsg);
+                    return true;                    
+                }
+                else{
+                    return false;                       
+                }
+            });            
+            
+            
+          // Pass our data to the template
+          var theCompiledHtml = theTemplate(context);
+
+          // Add the compiled html to the page
+          $('.content-placeholder').append(theCompiledHtml);
+        });
+      
+        
+        
+        
+    </script>
+    
+<!-- The #each helper iterates over an array of items. -->
+<script id="example-template" type="text/x-handlebars-template">
+
+  <!-- people is looked up on the global context, the one we pass to the compiled template -->
+      <table>
+         <tbody>
+         <th>Room type</th><th>Room rate</th>
+  {{#each listOfRatePlan}}
+                        
+
+    <!-- Here the context is each individual person. So we can access its properties directly: -->
+<!--    <p>{{firstName}} {{lastName}}</p>-->
+<!--      <p>{{name}}</p>-->
+     
+     
+<!--      <table>
+         <tbody>
+         <th>Room type</th><th>Room rate</th>
+          {{#each listOfRoomRate}}
+            <tr>
+
+                 <td>{{roomTypeCode}}</td> <td>{{rate}}</td>
+                  
+            </tr>
+          {{/each}}
+          </tbody>
+      </table>-->
+      
+         
+          {{#each listOfRoomRate}}
+                   {{#if (is_status this.roomTypeCode 'PK')}}
+                    <tr>
+                     <td>{{roomTypeCode}}</td> <td>{{rate}}</td>
+                    </tr>
+              
+                {{/if}}                
+          {{/each}}
+
+  {{/each}}
+  
+          </tbody>
+      </table>    
+
+</script>
+
+<div class="content-placeholder"></div>
+    
+</body>
+</html>

@@ -603,7 +603,7 @@
             //The helper.
         Handlebars.registerHelper('each_sort_warranties', function (array, opts) {
 
-            var key = "coverage_period";
+            var key = "rate";
 
             array.sort(function (a, b) {
 
@@ -616,27 +616,93 @@
                 // a must be equal to b
                 return 0;
             });
-
+            
             var s = '';
 
             for (var i = 0; i < array.length; i++) {
                 s += opts.fn(array[i]);
             }
-
+                    
             return s;
         });
 
+            var aval = [];
+            
+         Handlebars.registerHelper('sortedrate', function(nrate, options) {            
+             
+//             console.log(options.data);
+             
+            aval.push(nrate);
+            aval.sort(function(a, b){return a-b});  
+            var s = '';
+             /*if (nrate){
+                 
+             }*/
+/*            for (var i = 0; i < aval.length; i++) {
+                s += aval[i];
+            }  */           
+             
+/*    for (i in aval){
+        data.index = i;
+
+    }*/
+
+            for (var i = 0; i < aval.length; i++) {
+                s += aval[i];
+            }                
+             
+            return aval;
+             
+             
+//             return aval.sort(function(a, b){return a-b});
+         });
+            
+         Handlebars.registerHelper('sortedrateexp', function(nrate, options) {  
+             
+             console.log(nrate);
+             
+/*            return array.sort(function(a, b) {
+                var x = a[key],
+                y = b[key];
+
+                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+            });  */
+         })
+            var j=0;
+         Handlebars.registerHelper('displayit', function(finalrate, options) {         
+             console.log(this.rate);
+             
+             return finalrate;
+         });            
+            
+            
             
          Handlebars.registerHelper('is_status', function(msg, matchMsg, options) 
             {
+             
+             var key = "rate";
+             
                 if(msg === matchMsg){
-                    console.log('true');
-                    console.log(matchMsg);
+//                    console.log('true');
+//                    console.log(matchMsg);
+//                    console.log(this.rate);
+//                    console.log(this.rate);
+//                    this.rate.sort(function(a, b){return a-b})
+                    
+//                    aval.push(this.rate);
+//                    aval.sort(function(a, b){return a-b});
+//                    console.log(options.data);
+                    
+                    
+//                    console.log(aval.toString());
+//                    console.log(msg);
                     return true;                    
                 }
                 else{
                     return false;                       
                 }
+             
+             
             });            
             
             
@@ -658,7 +724,7 @@
   <!-- people is looked up on the global context, the one we pass to the compiled template -->
       <table>
          <tbody>
-         <th>Room type</th><th>Room rate</th>
+         <th>Room type</th><th>Room rate</th><th>Sorted Room rate</th>
   {{#each listOfRatePlan}}
                         
 
@@ -683,11 +749,10 @@
          
           {{#each listOfRoomRate}}
                    {{#if (is_status this.roomTypeCode 'PK')}}
-                    <tr>
-                     <td>{{roomTypeCode}}</td> <td>{{rate}}</td>
-                    </tr>
-              
-                {{/if}}                
+                        <tr>
+                         <td>{{roomTypeCode}}</td> <td>{{rate}}</td> <td>{{displayit (sortedrate rate)}}</td>
+                        </tr>          
+                   {{/if}}                
           {{/each}}
 
   {{/each}}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Handlebars Helpers Example</title>
+  </head>
+  <body>
+    <h1>Handlebars Helpers Example!</h1>
+    
+    <div id="result">
+    </div>
+    
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="handlebars-0.9.0.pre.5.js"></script>
+      
+      <script id="example-template" type="text/x-handlebars-template">
+         <div class="post">
+          <h1>By {{fullName author}}</h1>
+          <div class="body">{{body}}</div>
+
+          <h1>Comments</h1>
+
+          {{#each comments}}
+          <h2>By {{fullName author}}</h2>
+          <div class="body">{{body}}</div>
+          {{/each}}
+        </div>
+      </script>
+      
+         
+    <script type="text/javascript">
+      $(document).ready(function() {
+        
+        // compile our template
+        var template = Handlebars.compile($("#example-template").html());
+        
+        var context = {
+          author: {firstName: "Alan", lastName: "Johnson"},
+          body: "I Love Handlebars",
+          comments: [{
+            author: {firstName: "Yehuda", lastName: "Katz"},
+            body: "Me too!"
+          }]
+        };
+
+        Handlebars.registerHelper('fullName', function(person) {
+          return person.firstName + " " + person.lastName;
+        });
+        
+        $('#result').html(template(context));
+      });
+    </script>
+  </body>
+</html>      
